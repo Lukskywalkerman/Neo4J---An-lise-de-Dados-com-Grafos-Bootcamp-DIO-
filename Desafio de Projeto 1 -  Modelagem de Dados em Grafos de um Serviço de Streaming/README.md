@@ -1,24 +1,50 @@
-# 🚀 Bootcamp Neo4j: Transforme Dados em Insights Estratégicos
+# 🎬 Projeto de Banco de Dados em Grafo para Serviço de Streaming
 
-Domine o **Neo4j**, banco de dados de grafos utilizado por empresas como Walmart, eBay, Caterpillar, Novartis e US Army para:
-- Criar sistemas de recomendação
-- Detectar fraudes
-- Revelar padrões invisíveis
+## 📌 Descrição do Problema
 
-## 🔍 Por que Neo4j?
-- Representa relações complexas com **nós e arestas**
-- Consultas rápidas mesmo com **milhões de conexões**
-- Ideal para aplicações com dados altamente conectados
+Você foi contratado por um novo serviço de streaming de filmes e séries. Sua primeira tarefa é projetar o banco de dados da plataforma. Diferente dos sistemas relacionais tradicionais, a empresa quer **focar nos relacionamentos** para criar um sistema de recomendação poderoso e personalizado.
 
-## 🎓 Jornada de Aprendizado
-- **Gratuita e prática**
-- Do básico à integração com **Python**, **GraphQL** e **IA generativa**
-- Prepara para a **certificação oficial Neo4j**
-- Construa **3 projetos reais** para seu portfólio
+---
 
-## 🧠 Atividades do Bootcamp
-- **Mentorias (Live):** Interação com profissionais de empresas inovadoras
-- **Desafio de Código:** Teste seus conhecimentos com exercícios práticos
-- **Desafio de Projeto:** Crie projetos aplicando o conteúdo aprendido
-- **Ranking:** Pontue por participação, acertos e qualidade do código
+## 🎯 Desafio
 
+Modelar e criar um **grafo de conhecimento** que represente as entidades e conexões do serviço de streaming.
+
+### 🧱 Entidades (Nós)
+- `User` – Usuário da plataforma
+- `Movie` – Filme
+- `Series` – Série
+- `Genre` – Gênero
+- `Actor` – Ator/Atriz
+- `Director` – Diretor(a)
+
+### 🔗 Relacionamentos
+- `(:User)-[:WATCHED {rating}]->(:Movie|:Series)`  
+  Representa que um usuário assistiu a um conteúdo, com avaliação opcional.
+- `(:Actor)-[:ACTED_IN]->(:Movie|:Series)`  
+  Indica que um ator participou de um conteúdo.
+- `(:Director)-[:DIRECTED]->(:Movie|:Series)`  
+  Indica que um diretor dirigiu um conteúdo.
+- `(:Movie|:Series)-[:IN_GENRE]->(:Genre)`  
+  Classifica o conteúdo em um ou mais gêneros.
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+- **Neo4j** – Banco de dados de grafos
+- **Cypher** – Linguagem de consulta para grafos
+
+---
+
+## 🧪 Exemplos de Consultas Cypher
+
+```cypher
+// Criar um usuário
+CREATE (:User {name: 'Alice'})
+
+// Criar um filme
+CREATE (:Movie {title: 'Inception'})
+
+// Relacionar usuário com filme assistido e nota
+MATCH (u:User {name: 'Alice'}), (m:Movie {title: 'Inception'})
+CREATE (u)-[:WATCHED {rating: 5}]->(m)
